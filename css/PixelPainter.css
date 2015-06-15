@@ -1,0 +1,16 @@
+.grid {
+  border: 1px black solid;
+  height: 20px;
+  width: 20px;
+  margin: .5px;
+  display: inline-block;
+}
+
+#colorPalette {
+  position: relative;
+  top: 150px;
+}
+#mainGrid {
+  position: relative;
+  left: 200px;
+}
