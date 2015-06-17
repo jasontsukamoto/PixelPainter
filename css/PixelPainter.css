@@ -22,6 +22,22 @@ body #pixelPainter #colorPalette {
   top: -190px;
 }
 
+#colorPalette #picked {
+  height: 34px;
+  width: 34px;
+  background-color: white;
+  position: relative;
+  top: 67px;
+  left: 46px;
+}
+
+#colorPalette #picked #svg {
+  -ms-transform: scale(1,1); /* IE 9 */
+  -webkit-transform: scale(1,1); /* Safari */
+  transform: scale(1,1);
+  z-index: 30;
+}
+
 #undo {
   height: 37px;
   width: 109px;
@@ -36,7 +52,6 @@ svg {
   -ms-transform: scale(.15,.15); /* IE 9 */
   -webkit-transform: scale(.15,.15); /* Safari */
   transform: scale(.15,.15);
-  /*float: left;*/
 }
 
 .colorPalette_cells {

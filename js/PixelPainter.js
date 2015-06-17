@@ -10,6 +10,7 @@ window.onload = function() {
   pxlPainter.eraseButton();
   pxlPainter.clearButton();
   pxlPainter.hover();
+  pxlPainter.pickedColor();
 };
 
 var GridMaker = function() {
@@ -74,11 +75,12 @@ var GridMaker = function() {
   var eraseButton = function(paint) {
     var divEl = document.getElementById('colorPalette');
     var button = document.createElement('div');
+    var color = selected;
     button.setAttribute('id', 'undo');
     button.innerHTML = '<!--     <?xml version="1.0" encoding="utf-8"?> <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --> <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 14.2 14.3" enable-background="new 0 0 14.2 14.3" xml:space="preserve"> <polygon fill="#777755" points="5,0 0,5.1 5,5.1 5,5.1 11.6,5.1 11.6,11.8 5,11.8 5,8.1 2.4,8.1 2.4,14.3 14.2,14.3 14.2,2.6 5,2.6 "/> --> </svg>' + 'UNDO';
     divEl.appendChild(button);
     button.addEventListener('click', function(event) {
-      selected = 'transparent';
+      color = 'transparent';
     });
   };
 
@@ -133,6 +135,21 @@ var GridMaker = function() {
     });
   };
 
+  var pickedColor = function() {
+    var div = document.getElementById('colorPalette');
+    var picked = document.createElement('div');
+    var slash = document.createElement('div');
+    picked.setAttribute('id', 'picked');
+    slash.innerHTML = '<?xml version="1.0" encoding="utf-8"?> <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --> <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 33.7 33.7" enable-background="new 0 0 33.7 33.7" xml:space="preserve"> <line fill="none" stroke="#EE3B24" stroke-miterlimit="10" x1="33.4" y1="0.4" x2="0.4" y2="33.4"/> </svg>';
+    picked.appendChild(slash);
+    div.appendChild(picked);
+
+    var color = document.getElementById('colorPalette');
+    color.addEventListener('click', function(event) {
+      picked.style.background = selected;
+    });
+  };
+
   //returns functions to make them accessible outside of GridMaker scope
   return {
     createGrid : createGrid,
@@ -141,6 +158,7 @@ var GridMaker = function() {
     paint : paint,
     eraseButton : eraseButton,
     clearButton : clearButton,
-    hover : hover
+    hover : hover,
+    pickedColor : pickedColor
   };
 };
