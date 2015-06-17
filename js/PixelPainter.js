@@ -24,7 +24,7 @@ var GridMaker = function() {
     container.id = id;
 
     var holder = document.createElement('div');
-    holder.id = id + '_inner'
+    holder.id = id + '_inner';
 
     var counter = 0;
     for (var j = 0; j < y; j++) {
@@ -77,19 +77,19 @@ var GridMaker = function() {
     divEl.appendChild(button);
     button.addEventListener('click', function(event) {
       selected = 'transparent';
-
     });
   };
 
   var clearButton = function() {
     var divEl = document.getElementById('colorPalette_inner');
-    var button = document.createElement('button');
-    button.innerHTML = 'clear';
+    var button = document.createElement('div');
+    button.setAttribute('id', 'start-fresh')
+    button.innerHTML = 'START FRESH';
     divEl.appendChild(button);
     var canvas = document.getElementsByClassName('mainGrid_cells');
     button.addEventListener('click', function(event) {
       for (var i = 0; i < canvas.length; i++) {
-        canvas[i].style.background = 'transparent';
+        canvas[i].style.background = 'white';
       }
     });
   };
