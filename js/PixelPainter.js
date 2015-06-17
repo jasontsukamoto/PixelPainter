@@ -73,7 +73,6 @@ var GridMaker = function() {
     divEl.appendChild(button);
     button.addEventListener('click', function(event) {
       selected = 'transparent';
-      paint(selected);
     });
   };
 
@@ -86,7 +85,7 @@ var GridMaker = function() {
     console.log('canvas',canvas);
     button.addEventListener('click', function(event) {
       for (var i = 0; i < canvas.length; i++) {
-      canvas[i].style.background = 'transparent';
+        canvas[i].style.background = 'transparent';
       }
     });
   };
