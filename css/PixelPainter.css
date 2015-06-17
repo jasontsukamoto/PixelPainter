@@ -1,3 +1,38 @@
+body {
+  font-family: 'Roboto Slab', serif;
+}
+
+#colorContainer {
+  width: 250px;
+  height: 100%;
+  background: #252118;
+  text-align: center;
+  float: left;
+  color: #F26823;
+}
+
+button {
+  position: absolute;
+  top: 400px;
+}
+#erase {
+  float: left;
+}
+#clear {
+  float: right;
+}
+
+#mainGrid {
+  float: right;
+  background: #DEDFBE;
+}
+
+#logo {
+   -ms-transform: scale(.15,.15); /* IE 9 */
+    -webkit-transform: scale(.15,.15); /* Safari */
+    transform: scale(.15,.15);
+}
+
 .colorPalette_cells {
    position: relative;
   top: 150px;
