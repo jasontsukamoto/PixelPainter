@@ -9,6 +9,7 @@ window.onload = function() {
   pxlPainter.paint();
   pxlPainter.eraseButton();
   pxlPainter.clearButton();
+  pxlPainter.hover();
 };
 
 var GridMaker = function() {
@@ -84,13 +85,50 @@ var GridMaker = function() {
   var clearButton = function() {
     var divEl = document.getElementById('colorPalette');
     var button = document.createElement('div');
-    button.setAttribute('id', 'start-fresh')
+    button.setAttribute('id', 'start-fresh');
     button.innerHTML = 'START FRESH';
     divEl.appendChild(button);
     var canvas = document.getElementsByClassName('mainGrid_cells');
     button.addEventListener('click', function(event) {
       for (var i = 0; i < canvas.length; i++) {
         canvas[i].style.background = 'white';
+      }
+    });
+  };
+
+  var hover = function() {
+    var undo = document.querySelector('#undo');
+    var startFresh = document.querySelector('#start-fresh');
+    var colorPalette = document.querySelector('#colorPalette_inner');
+    undo.addEventListener('mouseover', function() {
+      undo.style.border = '3px solid #F26823';
+      undo.style.color = '#F26823';
+    });
+
+    undo.addEventListener('mouseout', function() {
+      undo.style.border = '1px solid #6B6B4D';
+      undo.style.color = '6B6B4D';
+    });
+
+    startFresh.addEventListener('mouseover', function() {
+      startFresh.style.border = '3px solid #F26823';
+      startFresh.style.color = '#F26823';
+    });
+
+    startFresh.addEventListener('mouseout', function() {
+      startFresh.style.border = '1px solid #6B6B4D';
+      startFresh.style.color = '6B6B4D';
+    });
+
+    colorPalette.addEventListener('mouseover', function(event) {
+      if (event.target.className === 'colorPalette_cells') {
+        event.target.style.border = '3px solid #000000';
+      }
+    });
+
+    colorPalette.addEventListener('mouseout', function(event) {
+      if (event.target.className === 'colorPalette_cells') {
+        event.target.style.border = 'none';
       }
     });
   };
@@ -102,6 +140,7 @@ var GridMaker = function() {
     selectColor : selectColor,
     paint : paint,
     eraseButton : eraseButton,
-    clearButton : clearButton
+    clearButton : clearButton,
+    hover : hover
   };
 };

@@ -12,7 +12,7 @@ body #pixelPainter #colorPalette {
   padding-top: 46px;
 }
 
-#start-fresh {
+#pixelPainter #colorPalette #start-fresh {
   height: 57px;
   width: 216px;
   border: 1px solid #6B6B4D;
