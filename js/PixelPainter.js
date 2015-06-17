@@ -71,9 +71,10 @@ var GridMaker = function() {
   };
 
   var eraseButton = function(paint) {
-    var divEl = document.getElementById('colorPalette_inner');
-    var button = document.createElement('button');
-    button.innerHTML = 'erase';
+    var divEl = document.getElementById('colorPalette');
+    var button = document.createElement('div');
+    button.setAttribute('id', 'undo');
+    button.innerHTML = '<!--     <?xml version="1.0" encoding="utf-8"?> <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --> <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 14.2 14.3" enable-background="new 0 0 14.2 14.3" xml:space="preserve"> <polygon fill="#777755" points="5,0 0,5.1 5,5.1 5,5.1 11.6,5.1 11.6,11.8 5,11.8 5,8.1 2.4,8.1 2.4,14.3 14.2,14.3 14.2,2.6 5,2.6 "/> --> </svg>' + 'UNDO';
     divEl.appendChild(button);
     button.addEventListener('click', function(event) {
       selected = 'transparent';
@@ -81,7 +82,7 @@ var GridMaker = function() {
   };
 
   var clearButton = function() {
-    var divEl = document.getElementById('colorPalette_inner');
+    var divEl = document.getElementById('colorPalette');
     var button = document.createElement('div');
     button.setAttribute('id', 'start-fresh')
     button.innerHTML = 'START FRESH';
