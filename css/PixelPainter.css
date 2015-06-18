@@ -22,6 +22,10 @@ body #pixelPainter #colorPalette {
   top: -190px;
 }
 
+#start-fresh {
+  line-height: 55px;
+}
+
 #colorPalette #picked {
   height: 34px;
   width: 34px;
@@ -29,14 +33,13 @@ body #pixelPainter #colorPalette {
   position: relative;
   top: 67px;
   left: 46px;
+  z-index: 20;
 }
 
-#colorPalette #picked #svg {
-  -ms-transform: scale(1,1); /* IE 9 */
-  -webkit-transform: scale(1,1); /* Safari */
-  transform: scale(1,1);
+#slash {
   z-index: 30;
 }
+
 
 #undo {
   height: 37px;
@@ -48,19 +51,19 @@ body #pixelPainter #colorPalette {
   left: 146px;
 }
 
-svg {
-  -ms-transform: scale(.15,.15); /* IE 9 */
-  -webkit-transform: scale(.15,.15); /* Safari */
-  transform: scale(.15,.15);
-}
-
 .colorPalette_cells {
-  height: 37px;
-  width: 37px;
+  height: 30px;
+  width: 30px;
   display: inline-block;
   position: relative;
   top: 146px;
+  border: 3px transparent solid;
 }
+
+.colorPalette_cells:hover {
+  border:3px black solid;
+}
+
 
 #mainGrid {
   height: 100%;
@@ -80,3 +83,21 @@ svg {
   background-color: white;
 }
 
+#undo {
+  background-image: url('../assets/undo.svg');
+  line-height: 35px;
+  background-repeat: no-repeat;
+  background-size: 18px;
+}
+
+#logo {
+  background-image: url('../assets/logo.svg');
+  background-repeat: no-repeat;
+  background-size: 30px;
+  position: relative;
+  bottom: 350px;
+  color: #F26823;
+  width: 220px;
+  font-size: 1.2em;
+  left: 55px;
+}

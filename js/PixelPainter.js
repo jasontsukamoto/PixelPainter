@@ -11,11 +11,13 @@ window.onload = function() {
   pxlPainter.clearButton();
   pxlPainter.hover();
   pxlPainter.pickedColor();
+  pxlPainter.logo();
 };
 
 var GridMaker = function() {
   var selected;
   var erase;
+  var mouseDown = false;
 
   //Class to create grids
   var createGrid = function(x, y, id) {
@@ -59,15 +61,31 @@ var GridMaker = function() {
   var selectColor = function() {
     var color = document.getElementById('colorPalette');
     color.addEventListener('click', function(event) {
-      selected = event.target.style.background;
+      selected = event.target.style.backgroundColor;
     });
   };
 
   var paint = function() {
     var canvas = document.getElementById('mainGrid');
-    canvas.addEventListener('click', function(event) {
+
+    canvas.addEventListener('mousedown', function(event) {
+      event.preventDefault();
       if (event.target.className === 'mainGrid_cells') {
-        event.target.style.background = selected;
+        event.target.style.backgroundColor = selected;
+      }
+
+      mouseDown = true;
+    });
+
+    canvas.addEventListener('mouseup', function() {
+      mouseDown = false;
+    });
+
+    canvas.addEventListener('mousemove', function() {
+      if (mouseDown === true) {
+        if (event.target.className === 'mainGrid_cells') {
+          event.target.style.backgroundColor = selected;
+        }
       }
     });
   };
@@ -77,7 +95,7 @@ var GridMaker = function() {
     var button = document.createElement('div');
     var color = selected;
     button.setAttribute('id', 'undo');
-    button.innerHTML = '<!--     <?xml version="1.0" encoding="utf-8"?> <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --> <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 14.2 14.3" enable-background="new 0 0 14.2 14.3" xml:space="preserve"> <polygon fill="#777755" points="5,0 0,5.1 5,5.1 5,5.1 11.6,5.1 11.6,11.8 5,11.8 5,8.1 2.4,8.1 2.4,14.3 14.2,14.3 14.2,2.6 5,2.6 "/> --> </svg>' + 'UNDO';
+    button.innerHTML = 'UNDO';
     divEl.appendChild(button);
     button.addEventListener('click', function(event) {
       color = 'transparent';
@@ -121,24 +139,13 @@ var GridMaker = function() {
       startFresh.style.border = '1px solid #6B6B4D';
       startFresh.style.color = '6B6B4D';
     });
-
-    colorPalette.addEventListener('mouseover', function(event) {
-      if (event.target.className === 'colorPalette_cells') {
-        event.target.style.border = '3px solid #000000';
-      }
-    });
-
-    colorPalette.addEventListener('mouseout', function(event) {
-      if (event.target.className === 'colorPalette_cells') {
-        event.target.style.border = 'none';
-      }
-    });
   };
 
   var pickedColor = function() {
     var div = document.getElementById('colorPalette');
     var picked = document.createElement('div');
     var slash = document.createElement('div');
+    slash.setAttribute('id', 'slash');
     picked.setAttribute('id', 'picked');
     slash.innerHTML = '<?xml version="1.0" encoding="utf-8"?> <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --> <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 33.7 33.7" enable-background="new 0 0 33.7 33.7" xml:space="preserve"> <line fill="none" stroke="#EE3B24" stroke-miterlimit="10" x1="33.4" y1="0.4" x2="0.4" y2="33.4"/> </svg>';
     picked.appendChild(slash);
@@ -146,8 +153,17 @@ var GridMaker = function() {
 
     var color = document.getElementById('colorPalette');
     color.addEventListener('click', function(event) {
+      slash.innerHTML = null;
       picked.style.background = selected;
     });
+  };
+
+  var logo = function() {
+    var div = document.getElementById('colorPalette');
+    var logo = document.createElement('div');
+    logo.setAttribute('id', 'logo');
+    logo.innerHTML = 'PIXEL PAINTER';
+    div.appendChild(logo);
   };
 
   //returns functions to make them accessible outside of GridMaker scope
@@ -159,6 +175,7 @@ var GridMaker = function() {
     eraseButton : eraseButton,
     clearButton : clearButton,
     hover : hover,
-    pickedColor : pickedColor
+    pickedColor : pickedColor,
+    logo : logo
   };
 };
