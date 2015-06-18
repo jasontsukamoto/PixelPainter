@@ -93,9 +93,12 @@ var GridMaker = function() {
   var eraseButton = function(paint) {
     var divEl = document.getElementById('colorPalette');
     var button = document.createElement('div');
+    var design = document.createElement('div');
     var color = selected;
     button.setAttribute('id', 'undo');
-    button.innerHTML = 'UNDO';
+    design.setAttribute('id', 'undoimage');
+    design.innerHTML = 'UNDO';
+    button.appendChild(design);
     divEl.appendChild(button);
     button.addEventListener('click', function(event) {
       color = 'transparent';

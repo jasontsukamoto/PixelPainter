@@ -4,7 +4,7 @@ body {
 }
 
 body #pixelPainter #colorPalette {
-  height: 100%;
+  height: 1000px;
   width: 302px;
   float: left;
   background-color: #252118;
@@ -66,7 +66,7 @@ body #pixelPainter #colorPalette {
 
 
 #mainGrid {
-  height: 100%;
+  height: 1000px;
   background-color: #DEDFBE;
  }
 
@@ -88,6 +88,11 @@ body #pixelPainter #colorPalette {
   line-height: 35px;
   background-repeat: no-repeat;
   background-size: 18px;
+  background-position: 9px 8px;
+}
+
+#undoimage {
+  margin-left: 25px;
 }
 
 #logo {
