@@ -12,9 +12,13 @@ window.onload = function() {
   pxlPainter.hover();
   pxlPainter.pickedColor();
   pxlPainter.logo();
+  pxlPainter.save();
+  pxlPainter.saveSubmit();
+  pxlPainter.hashChanged();
 };
 
-var GridMaker = function() {
+
+  var GridMaker = function() {
   var selected;
   var erase;
   var mouseDown = false;
@@ -39,6 +43,7 @@ var GridMaker = function() {
         var gridSq = document.createElement('div');
         gridSq.setAttribute('class', id + '_cells');
         gridSq.setAttribute('id', id + '_grid_' + counter);
+        gridSq.setAttribute('data-index', counter);
         row.appendChild(gridSq);
         counter++;
       }
@@ -49,6 +54,20 @@ var GridMaker = function() {
   };
 
   var pxlColor = function(arr) {
+    var pickedColor;
+    var colorPalette = $('#colorPalette');
+    var spectrum = $('<input>');
+    spectrum.attr('id', 'custom');
+
+    colorPalette.append(spectrum);
+
+
+
+    // var c = $('#picker').spectrum('get');
+    // var color = c.toHex();
+
+    // console.log('change',change);
+
     var color = document.getElementById('colorPalette');
     var count = document.getElementsByClassName('colorPalette_cells');
 
@@ -59,6 +78,16 @@ var GridMaker = function() {
   };
 
   var selectColor = function() {
+    // $("#custom").spectrum({
+    //   color : tinycolor,
+    //   flat : true,
+    //   // showInput : true,
+    //   togglePaletteOnly : true,
+    //   showButtons : false,
+    //   change: function(color) {
+    //     selected = color.toHexString();
+    //   }
+    // });
     var color = document.getElementById('colorPalette');
     color.addEventListener('click', function(event) {
       selected = event.target.style.backgroundColor;
@@ -169,6 +198,65 @@ var GridMaker = function() {
     div.appendChild(logo);
   };
 
+  //create a save button
+  var save = function() {
+    var colorPalette = $('#colorPalette');
+    var saveButton = $('<div>', {
+      html : 'SAVE'
+    });
+    saveButton.attr('id', 'saveButton');
+    colorPalette.append(saveButton);
+  };
+
+  var saveSubmit = function() {
+    var saveButton = $('#saveButton');
+    var mainContent = $('#mainGrid_inner').contents();
+    var gridContent = mainContent.contents();
+    var backgroundColor;
+    var id;
+    var savedImage = {};
+
+    saveButton.click(function() {
+      for (var i = 0; i < gridContent.length; i++) {
+        backgroundColor = $('#mainGrid_grid_' + i).css('background-color');
+        id = i;
+        if (backgroundColor !== 'rgb(255, 255, 255)') {
+          savedImage[id] = backgroundColor;
+        }
+      }
+
+      var stringified = JSON.stringify(savedImage);
+      var uri = window.btoa(stringified);
+
+      var state = {
+        "canBeAnything" : true
+      };
+      window.history.pushState(state, 'Pixel Painter', 'http://localhost:8080/#' + uri);
+
+    });
+    return savedImage;
+  };
+
+  var hashChanged = function() {
+    var pathname = window.location.hash;
+    pathname = pathname.replace('#', '');
+    var gridContent = $('#mainGrid_inner').contents().contents();
+    console.log(gridContent[0].id);
+    if (pathname !== '') {
+      var image = window.atob(pathname);
+      var parsedImage = JSON.parse(image);
+      for (var key in parsedImage) {
+        for (var i = 0; i < gridContent.length; i++) {
+          if (gridContent[i].id === 'mainGrid_grid_' + key) {
+            gridContent[i].style.backgroundColor = parsedImage[key];
+          }
+        }
+      }
+    }
+  };
+
+
+
   //returns functions to make them accessible outside of GridMaker scope
   return {
     createGrid : createGrid,
@@ -179,6 +267,9 @@ var GridMaker = function() {
     clearButton : clearButton,
     hover : hover,
     pickedColor : pickedColor,
-    logo : logo
+    logo : logo,
+    save : save,
+    saveSubmit : saveSubmit,
+    hashChanged : hashChanged
   };
 };

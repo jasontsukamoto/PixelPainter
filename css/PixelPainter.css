@@ -3,13 +3,25 @@ body {
   color: #6B6B4D;
 }
 
-body #pixelPainter #colorPalette {
+#colorPalette {
   height: 1000px;
   width: 302px;
   float: left;
   background-color: #252118;
   text-align: center;
   padding-top: 46px;
+  /*position: relative;*/
+}
+
+#colorPalette #saveButton {
+  margin: auto;
+  height: 37px;
+  width : 210px;
+  border: 1px solid #6B6B4D;
+  position: relative;
+  margin-top: 70px;
+  text-align: center;
+  line-height: 37px;
 }
 
 #pixelPainter #colorPalette #start-fresh {
@@ -68,7 +80,7 @@ body #pixelPainter #colorPalette {
 #mainGrid {
   height: 1000px;
   background-color: #DEDFBE;
- }
+}
 
 #mainGrid_inner {
   margin-left: 350px;
